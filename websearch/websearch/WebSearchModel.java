@@ -7,6 +7,16 @@ import java.util.List;
  */
 public class WebSearchModel {
     private final File sourceFile;
+
+    private static class ObserverEntry{
+        QueryObserver observer;
+        QueryFilter filter;
+
+        ObserverEntry(QueryObserver observer, QueryFilter filter){
+            this.observer = observer;
+            this.filter = filter;
+        }
+    }
     private final List<QueryObserver> observers = new ArrayList<>();
 
     public interface QueryObserver {
@@ -17,6 +27,10 @@ public class WebSearchModel {
     }
     public WebSearchModel(File sourceFile) {
         this.sourceFile = sourceFile;
+    }
+
+    public void addQueryObserver(QueryObserver observer, QueryFilter filter){
+        observers.add(new ObserverEntry(observer, filter));
     }
 
     public void pretendToSearch() {
