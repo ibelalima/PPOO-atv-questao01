@@ -17,7 +17,7 @@ public class WebSearchModel {
             this.filter = filter;
         }
     }
-    private final List<QueryObserver> observers = new ArrayList<>();
+    private final List<ObserverEntry> observers = new ArrayList<>();
 
     public interface QueryObserver {
         void onQuery(String query);
@@ -47,13 +47,11 @@ public class WebSearchModel {
         }
     }
 
-    public void addQueryObserver(QueryObserver queryObserver) {
-        observers.add(queryObserver);
-    }
-
     private void notifyAllObservers(String line) {
-        for (QueryObserver obs : observers) {
-            obs.onQuery(line);
+        for (ObserverEntry entry : observers) {
+            if(entry.filter.shouldNotify(line)){
+                entry.observer.onQuery(line);
+            }
         }
     }
 }
