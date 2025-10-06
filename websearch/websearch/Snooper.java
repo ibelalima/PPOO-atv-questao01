@@ -6,12 +6,12 @@ public class Snooper {
 
     public Snooper(WebSearchModel model) {
         this.model = model;
-    WebSearchModel.QueryFilter friendFilter = new WebSearchModel.QueryFilter() {
-            @Override
-            public boolean shouldNotify(String query) {
-                return query.toLowerCase().contains("friend");
-            }
-        };
+        WebSearchModel.QueryFilter friendFilter = new WebSearchModel.QueryFilter() {
+                @Override
+                public boolean shouldNotify(String query) {
+                    return query.toLowerCase().contains("friend");
+                }
+            };
 
         // Observador para consultas com "friend"
         WebSearchModel.QueryObserver friendObserver = new WebSearchModel.QueryObserver() {
