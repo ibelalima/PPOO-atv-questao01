@@ -12,7 +12,9 @@ public class WebSearchModel {
     public interface QueryObserver {
         void onQuery(String query);
     }
-
+    public interface QueryFilter{
+        boolean shouldNotify(String query);
+    }
     public WebSearchModel(File sourceFile) {
         this.sourceFile = sourceFile;
     }
